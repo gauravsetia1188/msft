@@ -1,0 +1,86 @@
+https://medium.com/@raycad.seedotech/monolithic-vs-microservice-architecture-e74bd951fc14
+
+1. Monolithic Architecture
+A monolithic application has single code base with multiple modules. Modules are divided as either for business features or technical features. It has single build system which build entire application. It also has single executable or deployable binary.
+
+Recommendation monolithic application based on 3 Tiers
+Monolithic Challenges
+Large monolithic code base makes complicated to understand, especially for new developer.
+Scaling become challenging.
+Overloaded IDE, Large code base makes IDE slow, build time increase.
+Extremely difficult to change technology or language or framework (hybrid technologies) because everything is tightly coupled and depend up on each other.
+Deployment challenges.
+Any change in the order module would require the entire application to be deployed again.
+Big database.
+Fault Tolerance.
+If a specific feature is not working it will make the system goes down. In order to handle this problem, the system has to be rebuilt, retested and redeployed
+2. Microservice Architecture
+A microservices architecture consists of a collection of small, autonomous services. Each service is self-contained and should implement a single business capability.
+
+Recommendation service based on microservices
+2.1. Microservice Characteristics
+Services are small, independent, and loosely coupled.
+Encapsulate a customer or business scenario.
+Each service is a separate codebase, which can be managed by a small development team.
+Services can be deployed independently. A team can update an existing service without rebuilding and redeploying the entire system.
+Services are responsible for persisting their own data or external state.
+This differs from the traditional model, where a separate data layer handles data persistence.
+Services communicate with each other by using well-defined APIs. Internal implementation details of each service are hidden from other services.
+Services don’t need to share the same technology stack, libraries, or frameworks (hybrid technologies).
+2.2. Steps
+Define an architecture that structures the application as a set of loosely coupled, collaborating services.
+Each service implements a set of narrowly, related functions.
+For example, an application might consist of services such as the order management service, the customer management service etc.
+Services communicate using either synchronous protocols such as HTTP/REST, gRPC or asynchronous protocols such as AMQP.
+Services can be developed and deployed independently of one another.
+Each service has its own database in order to be decoupled from other services.
+Data consistency between services is maintained.
+2.3. Microservice Benefits
+Independent deployments.
+You can update a service without redeploying the entire application, and roll back or roll forward an update if something goes wrong. Bug fixes and feature releases are more manageable and less risky.
+Independent development.
+A single development team can build, test, and deploy a service. The result is continuous innovation and a faster release cadence.
+Small, focused teams.
+Teams can focus on one service. The smaller scope of each service makes the code base easier to understand, and it’s easier for new team members to ramp up.
+Fault isolation.
+If a service goes down, it won’t take out the entire application. However, that doesn’t mean you get resiliency for free. You still need to follow resiliency best practices and design patterns. See Designing resilient applications for Azure.
+When change is required in a certain part of the application, only the related service can be modified and redeployed — no need to modify and redeploy the entire application.
+The developers can make use of the latest technologies.
+Mixed technology stacks (hybrid technologies).
+Teams can pick the technology that best fits their service.
+Granular scaling.
+Services can be scaled independently. At the same time, the higher density of services per VM means that VM resources are fully utilized. Using placement constraints, a services can be matched to a VM profile (high CPU, high memory, and so on).
+2.4. Microservice Challenges
+Complexity.
+A microservices application has more moving parts than the equivalent monolithic application. Each service is simpler, but the entire system as a whole is more complex especially when the number of services increases.
+Development and test.
+Developing against service dependencies requires a different approach. Existing tools are not necessarily designed to work with service dependencies. Refactoring across service boundaries can be difficult. It is also challenging to test service dependencies, especially when the application is evolving quickly.
+Data integrity.
+With each microservice responsible for its own data persistence. As a result, data consistency can be a challenge. Embrace eventual consistency where possible.
+Lack of governance.
+The decentralized approach to building microservices has advantages, but it can also lead to problems. You may end up with so many different languages and frameworks that the application becomes hard to maintain. It may be useful to put some project-wide standards in place, without overly restricting teams’ flexibility. This especially applies to cross-cutting functionality such as logging.
+Network congestion and latency.
+The use of many small, granular services can result in more interservice communication. Also, if the chain of service dependencies gets too long (service A calls B, which calls C…), the additional latency can become a problem. You will need to design APIs carefully. Avoid overly chatty APIs, think about serialization formats, and look for places to use asynchronous communication patterns.
+Management.
+To be successful with microservices requires a mature DevOps culture. Correlated logging across services can be challenging. Typically, logging must correlate multiple service calls for a single user operation.
+Versioning.
+Updates to a service must not break services that depend on it. Multiple services could be updated at any given time, so without careful design, you might have problems with backward or forward compatibility.
+Skillset.
+Microservices are highly distributed systems. Carefully evaluate whether the team has the skills and experience to be successful.
+2.5. Microservice Best Practices
+Model services around the business domain.
+Decentralize everything.
+Individual teams are responsible for designing and building services. Avoid sharing code or data schemas.
+Data storage should be private to the service that owns the data.
+Use the best storage for each service and data type.
+Services communicate through well-designed APIs.
+Avoid leaking implementation details. APIs should model the domain, not the internal implementation of the service.
+Avoid coupling between services.
+Causes of coupling include shared database schemas and rigid communication protocols.
+Offload cross-cutting concerns, such as authentication and SSL termination, to the gateway.
+Keep domain knowledge out of the gateway.
+The gateway should handle and route client requests without any knowledge of the business rules or domain logic. Otherwise, the gateway becomes a dependency and can cause coupling between services.
+Services should have loose coupling and high functional cohesion.
+Functions that are likely to change together should be packaged and deployed together. If they reside in separate services, those services end up being tightly coupled, because a change in one service will require updating the other service. Overly chatty communication between two services may be a symptom of tight coupling and low cohesion.
+Isolate failures.
+Use resiliency strategies to prevent failures within a service from cascading. See Resiliency patterns and Designing resilient applications.
