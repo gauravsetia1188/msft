@@ -1,0 +1,11 @@
+Difference between Semaphore vs. Mutex
+Parameters	Semaphore	Mutex
+Mechanism	It is a type of signaling mechanism.	It is a locking mechanism.
+Data Type	Semaphore is an integer variable.	Mutex is just an object.
+Modification	The wait and signal operations can modify a semaphore.	It is modified only by the process that may request or release a resource.
+Resource management	If no resource is free, then the process requires a resource that should execute wait operation. It should wait until the count of the semaphore is greater than 0.	If it is locked, the process has to wait. The process should be kept in a queue. This needs to be accessed only when the mutex is unlocked.
+Thread	You can have multiple program threads.	You can have multiple program threads in mutex but not simultaneously.
+Ownership	Value can be changed by any process releasing or obtaining the resource.	Object lock is released only by the process, which has obtained the lock on it.
+Types	Types of Semaphore are counting semaphore and binary semaphore and	Mutex has no subtypes.
+Operation	Semaphore value is modified using wait () and signal () operation.	Mutex object is locked or unlocked.
+Resources Occupancy	It is occupied if all resources are being used and the process requesting for resource performs wait () operation and blocks itself until semaphore count becomes >1.	In case if the object is already locked, the process requesting resources waits and is queued by the system before lock is released.
