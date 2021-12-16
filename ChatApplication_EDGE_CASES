@@ -1,0 +1,8 @@
+1. What if the Group messaging microservice fails?
+-> You use a message queue ( which has retries enabled, RabbitMQ )
+
+2. A user maynot open the application, and reply from notification.
+-> In that case, pass a field "fromNotif": true, so that the LastSeen table is not updated for that user.
+
+3. How do you remove a websocket connection? And is there a faster way to check if the user is now offline?
+-> to use the WebSocket connection itself and using the disconnect callback (once the user gets out of the application, the WebSocket connection can be disconnected).
