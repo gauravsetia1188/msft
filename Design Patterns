@@ -4,3 +4,8 @@ Abstract Factory – Creates families of related dependent objects
 Builder – Constructs complex objects using step-by-step approach
 
 https://www.baeldung.com/creational-design-patterns
+
+
+
+Decorator Design Pattern: A Decorator pattern can be used to attach additional responsibilities to an object either statically or dynamically.
+https://www.baeldung.com/java-decorator-pattern
