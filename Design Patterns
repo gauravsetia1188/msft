@@ -1,0 +1,6 @@
+Singleton – Ensures that at most only one instance of an object exists throughout application
+Factory Method – Creates objects of several related classes without specifying the exact object to be created
+Abstract Factory – Creates families of related dependent objects
+Builder – Constructs complex objects using step-by-step approach
+
+https://www.baeldung.com/creational-design-patterns
